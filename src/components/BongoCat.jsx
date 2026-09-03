@@ -1,22 +1,24 @@
 /**
- * Inline SVG Bongo Cat, drawn in the site palette (SVG-only literals:
- * #C98A4B bongo side, #EED9B8 bongo head, #FFFFFF cat/paws, #2E2E38 outline,
- * #F4A7B9 ears/blush).
+ * Inline SVG Bongo Cat, redrawn to match the user-supplied hero artwork:
+ * a white cat lying low with both mitten paws forward, warm brown outline,
+ * salmon paw pads and inner ears, soft pink blush (SVG-only literals:
+ * #FFFFFF cat, #4A3A37 outline, #F29B8D pads/ears, #F5C6C1 blush).
  *
- * `bap` swaps the two front paws between their frames so the cat baps along;
- * the default (static) frame matches the approved artboards.
+ * `bap` swaps the two front paws between raised/pressed frames so the cat
+ * baps along; the default (static) frame matches the artwork's pose with
+ * the left paw raised.
  */
-function BongoCat({ width = 210, height = 164, className, bap = false, decorative = true }) {
-  // Paw frames: [left, right] — default has the left paw raised; the bap
-  // frame swaps which paw is down on the bongo head.
-  const leftPawCy = bap ? 202 : 176;
-  const rightPawCy = bap ? 176 : 202;
+function BongoCat({ width = 240, height = 157, className, bap = false, decorative = true }) {
+  // Paw frames: [left, right] — each is a translate/rotate preset. The bap
+  // frame presses the raised paw down and lifts the other.
+  const leftPaw = bap ? 'translate(136 244) rotate(-6)' : 'translate(128 222) rotate(-30)';
+  const rightPaw = bap ? 'translate(304 220) rotate(26)' : 'translate(310 240) rotate(8)';
 
   return (
     <svg
       width={width}
       height={height}
-      viewBox="0 0 320 250"
+      viewBox="0 0 460 300"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
       className={className}
@@ -24,35 +26,49 @@ function BongoCat({ width = 210, height = 164, className, bap = false, decorativ
       focusable="false"
     >
       <path
-        d="M38 212 C 30 150 58 96 98 72 L 88 30 L 128 54 C 148 45 172 45 192 54 L 232 30 L 222 72 C 262 96 290 150 282 212 Z"
+        d="M86 268
+           C 70 268 62 258 72 246
+           L 140 170
+           C 146 158 156 146 170 138
+           L 162 104 L 196 124
+           C 216 112 240 110 258 120
+           L 286 102 L 288 134
+           C 308 148 322 162 334 176
+           C 362 204 384 234 390 252
+           C 394 264 386 268 374 268
+           Z"
         fill="#FFFFFF"
-        stroke="#2E2E38"
-        strokeWidth="5"
+        stroke="#4A3A37"
+        strokeWidth="9"
         strokeLinejoin="round"
       />
-      <path d="M97 44 L 114 55 L 101 62 Z" fill="#F4A7B9" />
-      <path d="M223 44 L 206 55 L 219 62 Z" fill="#F4A7B9" />
-      <circle cx="124" cy="118" r="7" fill="#2E2E38" />
-      <circle cx="196" cy="118" r="7" fill="#2E2E38" />
+      <path d="M170 112 L 188 124 L 174 132 Z" fill="#F29B8D" />
+      <path d="M280 110 L 282 128 L 268 124 Z" fill="#F29B8D" />
+      <circle cx="214" cy="164" r="7.5" fill="#4A3A37" />
+      <circle cx="282" cy="168" r="7.5" fill="#4A3A37" />
       <path
-        d="M146 136 Q 153 145 160 136 Q 167 145 174 136"
-        stroke="#2E2E38"
-        strokeWidth="4.5"
+        d="M232 176 Q 240 186 248 176 Q 256 186 264 176"
+        stroke="#4A3A37"
+        strokeWidth="6"
         fill="none"
         strokeLinecap="round"
       />
-      <ellipse cx="96" cy="140" rx="13" ry="8" fill="#F4A7B9" opacity="0.75" />
-      <ellipse cx="224" cy="140" rx="13" ry="8" fill="#F4A7B9" opacity="0.75" />
-      <path
-        d="M70 210 L 78 240 Q 160 254 242 240 L 250 210 Z"
-        fill="#C98A4B"
-        stroke="#2E2E38"
-        strokeWidth="5"
-        strokeLinejoin="round"
-      />
-      <ellipse cx="160" cy="210" rx="92" ry="20" fill="#EED9B8" stroke="#2E2E38" strokeWidth="5" />
-      <ellipse cx="90" cy={leftPawCy} rx="24" ry="15" fill="#FFFFFF" stroke="#2E2E38" strokeWidth="5" />
-      <ellipse cx="230" cy={rightPawCy} rx="24" ry="15" fill="#FFFFFF" stroke="#2E2E38" strokeWidth="5" />
+      <ellipse cx="184" cy="186" rx="15" ry="11" fill="#F5C6C1" />
+      <ellipse cx="302" cy="190" rx="15" ry="11" fill="#F5C6C1" />
+      <g transform={leftPaw}>
+        <ellipse cx="0" cy="0" rx="33" ry="25" fill="#FFFFFF" stroke="#4A3A37" strokeWidth="9" />
+        <ellipse cx="0" cy="6" rx="15" ry="11" fill="#F29B8D" />
+        <circle cx="-19" cy="-10" r="7" fill="#F29B8D" />
+        <circle cx="0" cy="-15" r="7" fill="#F29B8D" />
+        <circle cx="19" cy="-10" r="7" fill="#F29B8D" />
+      </g>
+      <g transform={rightPaw}>
+        <ellipse cx="0" cy="0" rx="33" ry="25" fill="#FFFFFF" stroke="#4A3A37" strokeWidth="9" />
+        <ellipse cx="0" cy="6" rx="15" ry="11" fill="#F29B8D" />
+        <circle cx="-19" cy="-10" r="7" fill="#F29B8D" />
+        <circle cx="0" cy="-15" r="7" fill="#F29B8D" />
+        <circle cx="19" cy="-10" r="7" fill="#F29B8D" />
+      </g>
     </svg>
   );
 }

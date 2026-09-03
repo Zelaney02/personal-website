@@ -52,18 +52,15 @@ function Hero() {
 
   return (
     <section className="hero" aria-labelledby="hero-heading">
-      {/* TODO: bongo-cat.png hero (source failed acceptance: download of the
-          user-supplied pngitem URL returns HTTP 403 through the proxy) —
-          revisit with user. Using the inline SVG fallback per the plan. */}
       <div
         ref={catRef}
         className="hero-cat"
         role="img"
-        aria-label="Bongo Cat, a cartoon white cat happily playing a pair of bongos"
+        aria-label="Bongo Cat, a cartoon white cat happily bapping its paws"
         onPointerEnter={triggerBap}
         onClick={triggerBap}
       >
-        <BongoCat width={210} height={164} bap={bap} />
+        <BongoCat width={240} height={157} bap={bap} />
       </div>
       <div className="hero-text">
         <h1 id="hero-heading">Jane He</h1>

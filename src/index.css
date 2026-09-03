@@ -54,6 +54,7 @@
   --max-w-grid: 1140px;
   --max-w-list: 800px;
   --max-w-tagline: 320px;
+  --max-w-chips: 700px;
 }
 
 @media (min-width: 768px) {
