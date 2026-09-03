@@ -3,6 +3,11 @@ import BongoCat from './BongoCat';
 
 const BAP_DURATION_MS = 120;
 
+// User-supplied hero artwork, hotlinked; if it fails to load the inline
+// BongoCat SVG (drawn to match it) takes over. For a self-hosted copy,
+// drop the file in public/bongo-cat.png and point src there instead.
+const HERO_IMG_SRC = 'https://i.postimg.cc/x8nbLkwg/bongocat.png';
+
 function prefersReducedMotion() {
   return (
     typeof window.matchMedia === 'function' &&
@@ -12,6 +17,7 @@ function prefersReducedMotion() {
 
 function Hero() {
   const [bap, setBap] = useState(false);
+  const [imgFailed, setImgFailed] = useState(false);
   const bapTimer = useRef(null);
   const catRef = useRef(null);
   const inViewRef = useRef(true);
@@ -54,13 +60,17 @@ function Hero() {
     <section className="hero" aria-labelledby="hero-heading">
       <div
         ref={catRef}
-        className="hero-cat"
+        className={bap ? 'hero-cat bap' : 'hero-cat'}
         role="img"
         aria-label="Bongo Cat, a cartoon white cat happily bapping its paws"
         onPointerEnter={triggerBap}
         onClick={triggerBap}
       >
-        <BongoCat width={240} height={157} bap={bap} />
+        {imgFailed ? (
+          <BongoCat width={240} height={157} bap={bap} />
+        ) : (
+          <img src={HERO_IMG_SRC} alt="" onError={() => setImgFailed(true)} />
+        )}
       </div>
       <div className="hero-text">
         <h1 id="hero-heading">Jane He</h1>

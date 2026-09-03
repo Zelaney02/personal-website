@@ -56,10 +56,31 @@
   height: 130px;
 }
 
+.hero-cat img {
+  display: block;
+  width: 230px;
+  height: auto;
+}
+
 @media (min-width: 768px) {
   .hero-cat svg {
     width: 240px;
     height: 157px;
+  }
+
+  .hero-cat img {
+    width: 280px;
+  }
+}
+
+/* The whole cat squashes on a bap (the SVG fallback also swaps paw frames) */
+@media (prefers-reduced-motion: no-preference) {
+  .hero-cat {
+    transition: transform 120ms ease;
+  }
+
+  .hero-cat.bap {
+    transform: translateY(3px) scale(0.97);
   }
 }
 
